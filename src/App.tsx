@@ -8,8 +8,10 @@ function App() {
 
   return (
     <>
-        <Header/>
-        <Hero/>
+        <div className='flex flex-col gap-10'>
+            <Header/>
+            <Hero/>
+        </div>
     </>
   )
 }
