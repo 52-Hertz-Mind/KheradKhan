@@ -7,8 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'nunito': ['nunito', 'sans-serif'],
-        'MyFont': ['"My Font"', 'serif'] // Ensure fonts with spaces have " " surrounding it.
+        MyFont: ['Kara', 'serif'] // Ensure fonts with spaces have " " surrounding it.
       },
     },
   },
