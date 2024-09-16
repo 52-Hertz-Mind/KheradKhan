@@ -12,9 +12,9 @@ function SignIn({isOpen, setIsOpen}){
     if(!isOpen) return null;
     return(
 
-        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50' >
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50' onClick={closePopup}>
             <div
-                className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-96 h-2/3 w-1/3 bg-white rounded-2xl shadow-2xl p-20 z-20'>
+                className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-96 h-2/3 w-1/3 bg-white rounded-2xl shadow-2xl p-20 z-20' onClick={(e) => e.stopPropagation()}>
                 <form onSubmit={signIn} className='flex flex-col gap-5' dir='rtl'>
                     <label htmlFor='email'>ایمیل</label>
                     <input type='email' placeholder='ایمیل' className='p-2 border-2'/>
