@@ -4,6 +4,7 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Homepage from './Pages/Homepage.tsx';
 import Dashboard from './Pages/Dashboard.tsx';
+import './i18n';
 
 const router = createBrowserRouter([
   {
