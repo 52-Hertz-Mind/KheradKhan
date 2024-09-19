@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 function Footer() {
   const [t, i18n] = useTranslation();
+
   return (
     <footer className="px-40 py-20 bg-gray-950 flex flex-col gap-10 font-MyFont">
       <div className="text-white flex flex-col gap-5" dir="rtl">
