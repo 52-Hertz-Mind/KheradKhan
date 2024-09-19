@@ -3,19 +3,25 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function Header() {
+  //region hooks
   const [isOpen, setIsOpen] = useState(false);
   const [captions, setCaptions] = useState<HeaderCaptionsModel>();
   const [t, i18n] = useTranslation();
+  useEffect(() => {
+    setCaption();
+  }, []);
+  //endregion
+
+  //region functions
   function setCaption() {
     const headerCaption = t('header', {
       returnObjects: true,
     }) as HeaderCaptionsModel;
     setCaptions(headerCaption);
   }
-  useEffect(() => {
-    setCaption();
-  }, []);
+  //endregion
 
+  //region template
   if (!captions) return;
   return (
     <>
@@ -31,6 +37,7 @@ function Header() {
       <SignIn isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
+  //endregion
 }
 
 export default Header;
