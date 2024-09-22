@@ -34,7 +34,6 @@ function Footer() {
       </div>
     </footer>
   );
-  //endregion
 }
 export default Footer;
 interface HeaderCaptionsModel {
