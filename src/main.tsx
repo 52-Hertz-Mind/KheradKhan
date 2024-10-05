@@ -5,12 +5,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Homepage from './Pages/Homepage.tsx';
 import Dashboard from './Pages/Dashboard.tsx';
 import './i18n';
+import NotFoundPage from './Pages/NotFoundPage.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Homepage />,
-    errorElement: <div>404 not found</div>,
+    errorElement: <NotFoundPage />,
   },
   {
     path: 'dashboard',
