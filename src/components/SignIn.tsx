@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { redirect, useNavigate } from 'react-router-dom';
 
 interface props {
   isOpen: boolean;
@@ -8,9 +9,12 @@ interface props {
 function SignIn({ isOpen, setIsOpen }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
   function signIn() {
     console.log(email, password);
     setIsOpen(false);
+    navigate('/dashboard');
   }
   function closePopup() {
     setIsOpen(false);
