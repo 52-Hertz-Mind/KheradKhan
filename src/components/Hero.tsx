@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import SignIn from './SignIn.tsx';
 function Hero() {
   //region hooks
   const [isOpen, setIsOpen] = useState(false);
@@ -27,13 +28,17 @@ function Hero() {
         <p>{captions.subtitle}</p>
       </div>
       <div>
-        <button className="bg-blue-500 rounded-2xl text-white p-2 w-40 hover:bg-blue-700 duration-150">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="bg-blue-500 rounded-2xl text-white p-2 w-40 hover:bg-blue-700 duration-150"
+        >
           {captions.startButton}
         </button>
       </div>
       <div>
         <img src="/src/assets/hero.png" className="h-[600px] w-[1000px]" />
       </div>
+      <SignIn isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
   //end region
