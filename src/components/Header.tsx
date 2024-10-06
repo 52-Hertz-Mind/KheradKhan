@@ -7,6 +7,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [captions, setCaptions] = useState<HeaderCaptionsModel>();
   const [t, i18n] = useTranslation();
+  i18n;
   useEffect(() => {
     setCaption();
   }, []);
