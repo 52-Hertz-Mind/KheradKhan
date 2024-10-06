@@ -5,6 +5,7 @@ function HowItWorks() {
   //region hooks
   const [captions, setCaptions] = useState<HowItWorksCaptionsModel>();
   const [t, i18n] = useTranslation();
+  i18n;
   useEffect(() => {
     setCaption();
   }, []);

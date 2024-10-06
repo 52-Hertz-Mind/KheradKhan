@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
 
-function SignIn({ isOpen, setIsOpen }) {
+const SignIn: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -78,6 +78,6 @@ function SignIn({ isOpen, setIsOpen }) {
       </div>
     </div>
   );
-}
+};
 
 export default SignIn;
