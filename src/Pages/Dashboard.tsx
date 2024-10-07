@@ -1,9 +1,10 @@
 import Footer from '../components/Footer.tsx';
+import DashboardHeader from '../components/DashboardHeader.tsx';
 
 function Dashboard() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <DashboardHeader />
       <Footer />
     </div>
   );
