@@ -6,14 +6,24 @@ interface props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
+interface Highlight {
+  bookName: string;
+  highlightText: string;
+}
 
 const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const [bookName, setBookName] = useState('');
-  const [writerName, setWriterName] = useState('');
+  const [highlight, setHighlight] = useState('');
+  const [books, setBooks] = useState<Highlight[]>([]);
 
-  function signIn() {
-    // console.log(email, password);
+  function addHighlight(bookName: string, highlightText: string) {
+    setBooks((prevBooks) => [...prevBooks, { bookName, highlightText }]);
+  }
+
+  function importHighlight() {
     setIsOpen(false);
+    addHighlight(bookName, highlight);
+    console.log(books);
   }
   function closePopup() {
     setIsOpen(false);
@@ -28,7 +38,11 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
         className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-96 h-2/3 w-1/3 bg-white rounded-2xl shadow-2xl p-20 z-20"
         onClick={(e) => e.stopPropagation()}
       >
-        <form onSubmit={signIn} className="flex flex-col gap-5" dir="rtl">
+        <form
+          onSubmit={importHighlight}
+          className="flex flex-col gap-5"
+          dir="rtl"
+        >
           <label htmlFor="email">نام کتاب</label>
           <input
             required
@@ -43,12 +57,12 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
             required
             placeholder="هایلایت"
             className="p-2 border-2 rounded-2xl h-32 w-full resize-none"
-            value={writerName}
-            onChange={(e) => setWriterName(e.target.value)}
+            value={highlight}
+            onChange={(e) => setHighlight(e.target.value)}
           />
 
           <button
-            onSubmit={signIn}
+            onSubmit={importHighlight}
             className="flex items-center justify-center gap-5 mt-10 bg-blue-500 rounded-2xl p-2 text-white hover:bg-blue-700 duration-150"
           >
             <FontAwesomeIcon
