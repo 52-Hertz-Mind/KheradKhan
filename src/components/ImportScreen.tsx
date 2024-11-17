@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../state/store.ts';
+import { addBook } from '../state/books/booksSlice.ts';
 
 interface props {
   isOpen: boolean;
@@ -12,12 +15,15 @@ interface Highlight {
 }
 
 const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
+  const books = useSelector((state: RootState) => state.books.books);
+  const bookDispatch = useDispatch<AppDispatch>();
   const [bookName, setBookName] = useState('');
   const [highlight, setHighlight] = useState('');
-  const [books, setBooks] = useState<Highlight[]>([]);
+  // const [books, setBooks] = useState<Highlight[]>([]);
 
   function addHighlight(bookName: string, highlightText: string) {
-    setBooks((prevBooks) => [...prevBooks, { bookName, highlightText }]);
+    // setBooks((prevBooks) => [...prevBooks, { bookName, highlightText }]);
+    bookDispatch(addBook({ bookName, highlightText }));
   }
 
   function importHighlight() {
