@@ -1,16 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface BookState {
   bookName: string;
   highlightText: string;
 }
-const initialState: BookState = {
-  bookName: '',
-  highlightText: '',
-};
+const initialState: BookState[] = [];
 const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    addBook: (state, action: PayloadAction<BookState>) => {
+      state.push(action.payload);
+    },
+  },
 });
 export default booksSlice.reducer;
