@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -23,11 +23,14 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   function importHighlight() {
     setIsOpen(false);
     addHighlight(bookName, highlight);
-    console.log(books);
   }
   function closePopup() {
     setIsOpen(false);
   }
+  useEffect(() => {
+    console.log(books);
+  }, [books]);
+
   if (!isOpen) return null;
   return (
     <div
