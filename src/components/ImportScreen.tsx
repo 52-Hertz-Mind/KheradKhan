@@ -9,10 +9,6 @@ interface props {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
-interface Highlight {
-  bookName: string;
-  highlightText: string;
-}
 
 const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const books = useSelector((state: RootState) => state.books.books);
