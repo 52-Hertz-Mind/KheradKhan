@@ -8,9 +8,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ImportScreen from '../components/ImportScreen.tsx';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [isImportScreenOpen, setIsImportScreenOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <div>
       <DashboardHeader />
@@ -34,7 +36,10 @@ function Dashboard() {
 
             <p className="group-hover:-translate-x-1 duration-150">خارج کردن</p>
           </button>
-          <button className="flex gap-5 items-center w-96 p-2 rounded-2xl hover:bg-gray-200  duration-300 group">
+          <button
+            className="flex gap-5 items-center w-96 p-2 rounded-2xl hover:bg-gray-200  duration-300 group"
+            onClick={() => navigate('/books')}
+          >
             <FontAwesomeIcon
               icon={faBook}
               className="size-8 transition-transform duration-300 group-hover:scale-110"
