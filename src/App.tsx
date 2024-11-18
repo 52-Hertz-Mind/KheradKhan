@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard.tsx';
 import './i18n';
 import NotFoundPage from './Pages/NotFoundPage.tsx';
 import Books from './Pages/Books.tsx';
+import Highlights from './Pages/Highlights.tsx';
 function App() {
   const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ function App() {
     {
       path: 'books',
       element: <Books />,
+    },
+    {
+      path: 'books/highlights',
+      element: <Highlights />,
     },
   ]);
 
