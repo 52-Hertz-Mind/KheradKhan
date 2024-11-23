@@ -8,7 +8,12 @@ interface BooksState {
   books: BookValue[];
 }
 const initialState: BooksState = {
-  books: [],
+  books: [
+    { bookName: 'Alice', highlightText: 'Alice' },
+    { bookName: 'Ted', highlightText: 'Ted' },
+    { bookName: 'Jack', highlightText: 'Jack' },
+    { bookName: 'Micah', highlightText: 'Micah' },
+  ],
 };
 const booksSlice = createSlice({
   name: 'books',
