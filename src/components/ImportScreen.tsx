@@ -18,14 +18,14 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const [highlight, setHighlight] = useState('');
   // const [books, setBooks] = useState<Highlight[]>([]);
 
-  function addHighlight(bookName: string, highlightText: string) {
+  function addHighlight(bookName: string, highlightText: string, id: number) {
     // setBooks((prevBooks) => [...prevBooks, { bookName, highlightText }]);
-    bookDispatch(addBook({ bookName, highlightText }));
+    bookDispatch(addBook({ bookName, highlightText, id }));
   }
 
   function importHighlight() {
     setIsOpen(false);
-    addHighlight(bookName, highlight);
+    addHighlight(bookName, highlight, 5);
   }
   function closePopup() {
     setIsOpen(false);

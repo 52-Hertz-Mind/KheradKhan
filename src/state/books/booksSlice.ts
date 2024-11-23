@@ -3,16 +3,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface BookValue {
   bookName: string;
   highlightText: string;
+  id: number;
 }
 interface BooksState {
   books: BookValue[];
 }
 const initialState: BooksState = {
   books: [
-    { bookName: 'Alice', highlightText: 'Alice' },
-    { bookName: 'Ted', highlightText: 'Ted' },
-    { bookName: 'Jack', highlightText: 'Jack' },
-    { bookName: 'Micah', highlightText: 'Micah' },
+    { bookName: 'Alice', highlightText: 'Alice', id: 1 },
+    { bookName: 'Ted', highlightText: 'Ted', id: 2 },
+    { bookName: 'Jack', highlightText: 'Jack', id: 3 },
+    { bookName: 'Micah', highlightText: 'Micah', id: 4 },
   ],
 };
 const booksSlice = createSlice({
