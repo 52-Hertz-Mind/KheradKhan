@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
 import DashboardHeader from '../components/DashboardHeader.tsx';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer.tsx';
 
 function Books() {
   const books = useSelector((state: RootState) => state.books.books);
@@ -20,6 +21,7 @@ function Books() {
           </button>
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

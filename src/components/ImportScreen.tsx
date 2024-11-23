@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../state/store.ts';
 import { addBook } from '../state/books/booksSlice.ts';
+import Footer from './Footer.tsx';
 
 interface props {
   isOpen: boolean;
@@ -98,6 +99,7 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
           </svg>
         </button>
       </div>
+      <Footer />
     </div>
   );
 };
