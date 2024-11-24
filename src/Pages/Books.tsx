@@ -3,12 +3,22 @@ import { RootState } from '../state/store.ts';
 import DashboardHeader from '../components/DashboardHeader.tsx';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
-import { useState } from 'react';
 
 function Books() {
   const books = useSelector((state: RootState) => state.books.books);
-  const [selectedBookId, setSelectedBookId] = useState<number>();
+  // const [selectedBookId, setSelectedBookId] = useState<number>();
   const navigate = useNavigate();
+
+  //region function
+  function navigateToBook(id: number) {
+    navigate('/books/highlights', {
+      state: {
+        selectedBookId: id,
+      },
+    });
+  }
+
+  //endregion
 
   return (
     <div>
@@ -17,10 +27,7 @@ function Books() {
         {books.map((book, index) => (
           <button
             onClick={() => {
-              setSelectedBookId(book.id);
-              navigate('/books/highlights', {
-                state: { selectedBookId: book.id },
-              });
+              navigateToBook(book.id);
             }}
             className="flex flex-col"
             key={index}
