@@ -6,7 +6,6 @@ import Footer from '../components/Footer.tsx';
 
 function Books() {
   const books = useSelector((state: RootState) => state.books.books);
-  // const [selectedBookId, setSelectedBookId] = useState<number>();
   const navigate = useNavigate();
 
   //region function
@@ -17,7 +16,6 @@ function Books() {
       },
     });
   }
-
   //endregion
 
   return (
