@@ -9,12 +9,13 @@ function Books() {
   const navigate = useNavigate();
 
   //region function
-  function navigateToBook(id: number) {
-    navigate('/books/highlights', {
-      state: {
-        selectedBookId: id,
-      },
-    });
+  function navigateToBook(id: string) {
+    // navigate('/books/highlights', {
+    //   state: {
+    //     selectedBookId: id,
+    //   },
+    // });
+    navigate(`/books/highlights/${id}`);
   }
   //endregion
 
