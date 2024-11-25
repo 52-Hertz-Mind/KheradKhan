@@ -10,10 +10,30 @@ interface BooksState {
 }
 const initialState: BooksState = {
   books: [
-    { bookName: 'Alice', highlightText: 'Alice', id: 1 },
-    { bookName: 'Ted', highlightText: 'Ted', id: 2 },
-    { bookName: 'Jack', highlightText: 'Jack', id: 3 },
-    { bookName: 'Micah', highlightText: 'Micah', id: 4 },
+    {
+      bookName: 'بی‌شعوری',
+      highlightText:
+        'بی‌شعوری، نوعی اختلال رفتاری است که فرد در اثر آن نمی‌تواند با دیگران به شکلی محترمانه و انسانی رفتار کند.',
+      id: 1,
+    },
+    {
+      bookName: 'هنر شفاف اندیشیدن',
+      highlightText:
+        'ما انسان‌ها معمولاً بیشتر به احساساتمان وابسته‌ایم تا به تفکر منطقی، و این موضوع تصمیم‌گیری‌های ما را تحت تأثیر قرار می‌دهد.',
+      id: 2,
+    },
+    {
+      bookName: 'انسان در جستجوی معنا',
+      highlightText:
+        'معنای زندگی در شرایط سخت، در توانایی ما برای یافتن هدفی عمیق‌تر نهفته است.',
+      id: 3,
+    },
+    {
+      bookName: 'چه کسی پنیر مرا جابجا کرد؟',
+      highlightText:
+        'تغییر اجتناب‌ناپذیر است، و کسانی که با آن تطبیق پیدا کنند، موفق‌تر خواهند بود.',
+      id: 4,
+    },
   ],
 };
 const booksSlice = createSlice({
