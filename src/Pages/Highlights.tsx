@@ -1,16 +1,24 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
 import Footer from '../components/Footer.tsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Highlights() {
   const location = useLocation();
   const { selectedBookId } = location.state || {};
+  const navigate = useNavigate();
   const books = useSelector((state: RootState) => state.books.books);
 
   const filteredBooks = books.filter((book) => book.id === selectedBookId);
   return (
     <div className="bg-gray-200">
+      <div className="px-96 pt-10 flex items-center justify-between" dir="rtl">
+        <button onClick={() => navigate('/books')}>
+          <FontAwesomeIcon className="size-8" icon={faArrowRight} />
+        </button>
+      </div>
       <div className="p-10 flex flex-col justify-center items-center" dir="rtl">
         {filteredBooks.map((book) => (
           <p className="font-bold text-2xl">{book.bookName}</p>
