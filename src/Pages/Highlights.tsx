@@ -1,17 +1,19 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
 import Footer from '../components/Footer.tsx';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Highlights() {
-  const location = useLocation();
-  const { selectedBookId } = location.state || {};
+  // const location = useLocation();
+  // const { selectedBookId } = location.state || {};
+  const { id } = useParams();
+
   const navigate = useNavigate();
   const books = useSelector((state: RootState) => state.books.books);
 
-  const filteredBooks = books.filter((book) => book.id === selectedBookId);
+  const filteredBooks = books.filter((book) => book.id === id);
   return (
     <div className="bg-gray-200">
       <div className="px-96 pt-10 flex items-center justify-between" dir="rtl">

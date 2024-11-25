@@ -22,7 +22,7 @@ function App() {
       element: <Books />,
     },
     {
-      path: 'books/highlights',
+      path: 'books/highlights/:id',
       element: <Highlights />,
     },
   ]);
