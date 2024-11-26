@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface BookValue {
   bookName: string;
   highlightText: string;
+  bookImage: string;
   id: string;
 }
 interface BooksState {
@@ -14,25 +15,36 @@ const initialState: BooksState = {
       bookName: 'بی‌شعوری',
       highlightText:
         'بی‌شعوری، نوعی اختلال رفتاری است که فرد در اثر آن نمی‌تواند با دیگران به شکلی محترمانه و انسانی رفتار کند.',
+      bookImage: '/bookImageSample.png',
       id: '1',
     },
     {
       bookName: 'هنر شفاف اندیشیدن',
       highlightText:
         'ما انسان‌ها معمولاً بیشتر به احساساتمان وابسته‌ایم تا به تفکر منطقی، و این موضوع تصمیم‌گیری‌های ما را تحت تأثیر قرار می‌دهد.',
+      bookImage: '/bookImageSample.png',
       id: '2',
     },
     {
       bookName: 'انسان در جستجوی معنا',
       highlightText:
         'معنای زندگی در شرایط سخت، در توانایی ما برای یافتن هدفی عمیق‌تر نهفته است.',
+      bookImage: '/bookImageSample.png',
       id: '3',
     },
     {
       bookName: 'چه کسی پنیر مرا جابجا کرد؟',
       highlightText:
         'تغییر اجتناب‌ناپذیر است، و کسانی که با آن تطبیق پیدا کنند، موفق‌تر خواهند بود.',
+      bookImage: '/bookImageSample.png',
       id: '4',
+    },
+    {
+      bookName: 'چه کسی پنیر مرا جابجا کرد2؟',
+      highlightText:
+        'تغییر اجتناب‌ناپذیر است، و کسانی که با آن تطبیق پیدا کنند، موفق‌تر خواهند بود.',
+      bookImage: '/bookImageSample.png',
+      id: '5',
     },
   ],
 };
