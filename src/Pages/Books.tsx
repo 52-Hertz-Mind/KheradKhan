@@ -8,13 +8,8 @@ function Books() {
   const books = useSelector((state: RootState) => state.books.books);
   const navigate = useNavigate();
 
-  //region function
+  //region functions
   function navigateToBook(id: string) {
-    // navigate('/books/highlights', {
-    //   state: {
-    //     selectedBookId: id,
-    //   },
-    // });
     navigate(`/books/highlights/${id}`);
   }
   //endregion
@@ -22,17 +17,21 @@ function Books() {
   return (
     <div>
       <DashboardHeader />
-      <div className="flex flex-col gap-5 p-10 items-center border w-screen h-full">
+      <div
+        className="grid grid-cols-4 gap-5 p-40 items-center border w-screen h-full"
+        dir="rtl"
+      >
         {books.map((book, index) => (
-          <button
+          <div
+            className="size-full border p-10 cursor-pointer"
             onClick={() => {
               navigateToBook(book.id);
             }}
-            className="flex flex-col"
-            key={index}
           >
-            {book.bookName}
-          </button>
+            <button className="flex flex-col" key={index}>
+              {book.bookName}
+            </button>
+          </div>
         ))}
       </div>
       <Footer />
