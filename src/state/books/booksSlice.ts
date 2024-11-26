@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface BookValue {
   bookName: string;
   highlightText: string;
-  bookImage: string;
+  bookImage?: string;
   id: string;
 }
 interface BooksState {
