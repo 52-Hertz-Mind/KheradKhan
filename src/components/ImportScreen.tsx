@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../state/store.ts';
 import { addBook } from '../state/books/booksSlice.ts';
-import Footer from './Footer.tsx';
 
 interface props {
   isOpen: boolean;
@@ -18,14 +17,14 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const [highlight, setHighlight] = useState('');
   // const [books, setBooks] = useState<Highlight[]>([]);
 
-  function addHighlight(bookName: string, highlightText: string, id: number) {
+  function addHighlight(bookName: string, highlightText: string, id: string) {
     // setBooks((prevBooks) => [...prevBooks, { bookName, highlightText }]);
     bookDispatch(addBook({ bookName, highlightText, id }));
   }
 
   function importHighlight() {
     setIsOpen(false);
-    addHighlight(bookName, highlight, 5);
+    addHighlight(bookName, highlight, '6');
   }
   function closePopup() {
     setIsOpen(false);
@@ -99,7 +98,6 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
           </svg>
         </button>
       </div>
-      <Footer />
     </div>
   );
 };
