@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBolt } from '@fortawesome/free-solid-svg-icons';
-function DashboardHeader() {
+function DashboardNavbar() {
   return (
     <div className="p-5 px-96 flex items-center gap-5 justify-between">
       <div className="flex items-center gap-5">
@@ -47,4 +47,4 @@ function DashboardHeader() {
   );
 }
 
-export default DashboardHeader;
+export default DashboardNavbar;

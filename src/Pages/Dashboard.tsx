@@ -1,5 +1,5 @@
 import Footer from '../components/Footer.tsx';
-import DashboardHeader from '../components/DashboardHeader.tsx';
+import DashboardNavbar from '../components/DashboardNavbar.tsx';
 import {
   faBook,
   faDownload,
@@ -15,7 +15,7 @@ function Dashboard() {
   const navigate = useNavigate();
   return (
     <div>
-      <DashboardHeader />
+      <DashboardNavbar />
       <div dir="rtl" className="flex justify-center h-screen px-96 py-20">
         <div className="flex flex-col gap-5 items-center border p-12 w-1/2">
           <button

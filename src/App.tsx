@@ -1,6 +1,6 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Homepage from './Pages/Homepage.tsx';
+import Landing from './Pages/Landing.tsx';
 import Dashboard from './Pages/Dashboard.tsx';
 import './i18n';
 import NotFoundPage from './Pages/NotFoundPage.tsx';
@@ -10,7 +10,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Homepage />,
+      element: <Landing />,
       errorElement: <NotFoundPage />,
     },
     {
