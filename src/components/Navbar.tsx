@@ -2,7 +2,7 @@ import SignIn from './SignIn.tsx';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-function Header() {
+function Navbar() {
   //region hooks
   const [isOpen, setIsOpen] = useState(false);
   const [captions, setCaptions] = useState<HeaderCaptionsModel>();
@@ -41,7 +41,7 @@ function Header() {
   //endregion
 }
 
-export default Header;
+export default Navbar;
 
 interface HeaderCaptionsModel {
   name: string;

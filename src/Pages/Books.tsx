@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
-import DashboardHeader from '../components/DashboardHeader.tsx';
+import DashboardNavbar from '../components/DashboardNavbar.tsx';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
 
@@ -16,7 +16,7 @@ function Books() {
 
   return (
     <>
-      <DashboardHeader />
+      <DashboardNavbar />
       <div dir="rtl" className="flex flex-col items-start">
         <div className="size-1/2 mx-auto mt-10">
           <h1 className="text-5xl ">کتاب ها</h1>
