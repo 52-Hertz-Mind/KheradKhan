@@ -15,10 +15,8 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const bookDispatch = useDispatch<AppDispatch>();
   const [bookName, setBookName] = useState('');
   const [highlight, setHighlight] = useState('');
-  // const [books, setBooks] = useState<Highlight[]>([]);
 
   function addHighlight(bookName: string, highlightText: string, id: string) {
-    // setBooks((prevBooks) => [...prevBooks, { bookName, highlightText }]);
     bookDispatch(addBook({ bookName, highlightText, id }));
   }
 
