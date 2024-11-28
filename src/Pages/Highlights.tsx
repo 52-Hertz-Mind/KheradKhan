@@ -1,13 +1,11 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
 import Footer from '../components/Footer.tsx';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Highlights() {
-  // const location = useLocation();
-  // const { selectedBookId } = location.state || {};
   const { id } = useParams();
 
   const navigate = useNavigate();
