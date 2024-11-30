@@ -25,12 +25,22 @@ function Highlights() {
         ))}
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book) => (
-            <div
-              className="size-1/3 h-96 m-auto mt-10 mb-10 text-gray-800 rounded-2xl p-10 bg-white"
-              key={book.id}
-            >
-              <p>{book.highlightText}</p>
+            <div className="w-screen" dir="rtl">
+              {book.highlightText.map((text) => (
+                <div
+                  className="size-1/3 h-96 m-auto mt-10 mb-10 text-gray-800 rounded-2xl p-10 bg-white"
+                  key={book.id}
+                >
+                  <p key={book.id}>{text}</p>
+                </div>
+              ))}
             </div>
+            // <div
+            //   className="size-1/3 h-96 m-auto mt-10 mb-10 text-gray-800 rounded-2xl p-10 bg-white"
+            //   key={book.id}
+            // >
+            //   <p>{book.highlightText}</p>
+            // </div>
           ))
         ) : (
           <p className="text-center text-gray-500">

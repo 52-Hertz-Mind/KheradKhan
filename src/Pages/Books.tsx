@@ -3,6 +3,7 @@ import { RootState } from '../state/store.ts';
 import DashboardNavbar from '../components/DashboardNavbar.tsx';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
+import { useEffect } from 'react';
 
 function Books() {
   const books = useSelector((state: RootState) => state.books.books);
@@ -14,6 +15,9 @@ function Books() {
   }
   //endregion
 
+  useEffect(() => {
+    console.log(books);
+  }, [books]);
   return (
     <>
       <DashboardNavbar />
