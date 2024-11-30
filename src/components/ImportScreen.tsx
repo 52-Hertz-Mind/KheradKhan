@@ -16,13 +16,13 @@ const ImportScreen: React.FC<props> = ({ isOpen, setIsOpen }) => {
   const [bookName, setBookName] = useState('');
   const [highlight, setHighlight] = useState('');
 
-  function addHighlight(bookName: string, highlightText: string, id: string) {
+  function addHighlight(bookName: string, highlightText: string[], id: string) {
     bookDispatch(addBook({ bookName, highlightText, id }));
   }
 
   function importHighlight() {
     setIsOpen(false);
-    addHighlight(bookName, highlight, '6');
+    addHighlight(bookName, [highlight], '1');
   }
   function closePopup() {
     setIsOpen(false);

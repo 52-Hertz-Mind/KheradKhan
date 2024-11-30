@@ -69,7 +69,19 @@ const booksSlice = createSlice({
   initialState,
   reducers: {
     addBook: (state, action: PayloadAction<BookValue>) => {
-      state.books.push(action.payload);
+      const existingBookIndex = state.books.findIndex(
+        (book) => book.id === action.payload.id
+      );
+
+      if (existingBookIndex !== -1) {
+        // If the book already exists, append the highlights
+        state.books[existingBookIndex].highlightText.push(
+          ...action.payload.highlightText
+        );
+      } else {
+        // If the book doesn't exist, add a new one
+        state.books.push(action.payload);
+      }
     },
   },
 });
