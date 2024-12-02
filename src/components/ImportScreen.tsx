@@ -130,31 +130,34 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             ))}
           </datalist>
           {/*image*/}
-          <div className="flex flex-col items-center gap-4">
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              انتخاب تصویر
-            </button>
+          {!existingBook && (
+            <div className="flex flex-col items-center gap-4">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+              >
+                انتخاب تصویر
+              </button>
 
-            {/* Display file name */}
-            <span className="text-gray-700">{fileName}</span>
+              {/* Display file name */}
+              <span className="text-gray-700">{fileName}</span>
 
-            {/* Display error message if file type is incorrect */}
-            {errorMessage && (
-              <span className="text-red-500">{errorMessage}</span>
-            )}
+              {/* Display error message if file type is incorrect */}
+              {errorMessage && (
+                <span className="text-red-500">{errorMessage}</span>
+              )}
 
-            {/* Hidden native file input */}
-            <input
-              type="file"
-              ref={fileInputRef}
-              className="hidden"
-              accept="image/*" // Accept only image files
-              onChange={handleFileChange}
-            />
-          </div>
+              {/* Hidden native file input */}
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept="image/*" // Accept only image files
+                onChange={handleFileChange}
+              />
+            </div>
+          )}
+
           {/* Input for the highlight text */}
           <label htmlFor="highlight">هایلایت</label>
           <textarea
