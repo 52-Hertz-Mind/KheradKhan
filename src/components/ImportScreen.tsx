@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'; // React hooks for managing state and side effects
+import { useEffect, useRef, useState } from 'react'; // React hooks for managing state and side effects
 import { faDownload } from '@fortawesome/free-solid-svg-icons'; // FontAwesome icon for download
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Component to render FontAwesome icons
 import { useDispatch, useSelector } from 'react-redux'; // Redux hooks for interacting with the state
@@ -25,8 +25,28 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   // State to store the selected book's ID
   const [choosedBookId, setChoosedBookId] = useState<string | null>(null);
 
+  //book image handling
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [fileName, setFileName] = useState('هیچ تصویری انتخاب نشده است');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.type.startsWith('image/')) {
+        setFileName(file.name); // Update with selected image file name
+        setErrorMessage(null); // Clear error if file is valid
+      } else {
+        setFileName('هیچ تصویری انتخاب نشده است');
+        setErrorMessage('لطفاً فقط یک فایل تصویری انتخاب کنید.');
+      }
+    }
+  };
+
   // State to manage the input for the highlight text
   const [highlight, setHighlight] = useState('');
+
+  const existingBook = books.find((book) => book.bookName === bookName);
 
   // Function to generate a unique ID for a new book
   const generateUniqueId = () => {
@@ -43,7 +63,6 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     // Check if the entered book name already exists in the list
-    const existingBook = books.find((book) => book.bookName === bookName);
 
     if (existingBook) {
       // If the book exists, add the highlight to the existing book
@@ -110,7 +129,32 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
               <option key={book.id} value={book.bookName} /> // Render each book as an option
             ))}
           </datalist>
+          {/*image*/}
+          <div className="flex flex-col items-center gap-4">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
+              انتخاب تصویر
+            </button>
 
+            {/* Display file name */}
+            <span className="text-gray-700">{fileName}</span>
+
+            {/* Display error message if file type is incorrect */}
+            {errorMessage && (
+              <span className="text-red-500">{errorMessage}</span>
+            )}
+
+            {/* Hidden native file input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
+              accept="image/*" // Accept only image files
+              onChange={handleFileChange}
+            />
+          </div>
           {/* Input for the highlight text */}
           <label htmlFor="highlight">هایلایت</label>
           <textarea
