@@ -3,7 +3,8 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons'; // FontAwesome i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Component to render FontAwesome icons
 import { useDispatch, useSelector } from 'react-redux'; // Redux hooks for interacting with the state
 import { AppDispatch, RootState } from '../state/store.ts'; // Type definitions for Redux store and dispatch
-import { addBook } from '../state/books/booksSlice.ts'; // Redux action to add a book to the store
+import { addBook } from '../state/books/booksSlice.ts';
+import { Autocomplete, TextField } from '@mui/material'; // Redux action to add a book to the store
 
 // Props interface for the ImportScreen component
 interface Props {
@@ -29,6 +30,8 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState('هیچ تصویری انتخاب نشده است');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [selectedBook, setSelectedBook] = useState();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -67,12 +70,12 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
     if (existingBook) {
       // If the book exists, add the highlight to the existing book
       setIsOpen(false); // Close the popup
-      addHighlight(bookName, [highlight], existingBook.id); // Add highlight to the existing book
+      addHighlight(selectedBook!.bookName, [highlight], existingBook.id); // Add highlight to the existing book
     } else {
       // If the book doesn't exist, create a new book
       const newId = generateUniqueId(); // Generate a new unique ID
       setIsOpen(false); // Close the popup
-      addHighlight(bookName, [highlight], newId); // Add the new book with the highlight
+      addHighlight(selectedBook!.bookName, [highlight], newId); // Add the new book with the highlight
     }
   }
 
@@ -82,9 +85,10 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   }
 
   // Handle changes in the book selection
-  const handleBookSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedBook = books.find((book) => book.bookName === e.target.value); // Check if the input value matches an existing book
-    setBookName(e.target.value); // Update the book name state
+  const handleBookSelection = (bookObject) => {
+    //const selectedBook = books.find((book) => book.bookName === e.target.value); // Check if the input value matches an existing book
+    //setBookName(e.target.value); // Update the book name state
+    setSelectedBook(bookObject);
     setChoosedBookId(selectedBook ? selectedBook.id : null); // Update the selected book ID
   };
 
@@ -113,23 +117,27 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         >
           {/* Input for the book name */}
           <label htmlFor="bookName">نام کتاب</label>
-          <input
-            required
-            type="text"
-            list="books" // Connect the input to the datalist with the available books
-            placeholder="نام کتاب"
-            className="p-2 border-2 rounded-2xl"
-            value={bookName} // Bind the input value to the bookName state
-            onChange={handleBookSelection} // Update the state when the input changes
+          <Autocomplete
+            value={selectedBook} // Store the selected book object
+            onChange={(event, newValue) => {
+              handleBookSelection(newValue);
+              console.log(newValue);
+            }}
+            options={books} // Provide the book objects as options
+            getOptionLabel={(option) => option.bookName} // Show the book name
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="نام کتاب"
+                variant="outlined"
+                placeholder="نام کتاب را انتخاب یا وارد کنید"
+              />
+            )}
+            freeSolo // Allow users to enter a custom book name
           />
 
-          {/* Datalist to show existing books */}
-          <datalist id="books">
-            {books.map((book) => (
-              <option key={book.id} value={book.bookName} /> // Render each book as an option
-            ))}
-          </datalist>
           {/*image*/}
+
           {!existingBook && (
             <div className="flex flex-col items-center gap-4">
               <button
