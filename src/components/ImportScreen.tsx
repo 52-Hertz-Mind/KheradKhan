@@ -31,6 +31,8 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   const [fileName, setFileName] = useState('هیچ تصویری انتخاب نشده است');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const [selectedBook, setSelectedBook] = useState();
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -68,12 +70,12 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
     if (existingBook) {
       // If the book exists, add the highlight to the existing book
       setIsOpen(false); // Close the popup
-      addHighlight(bookName, [highlight], existingBook.id); // Add highlight to the existing book
+      addHighlight(selectedBook!.bookName, [highlight], existingBook.id); // Add highlight to the existing book
     } else {
       // If the book doesn't exist, create a new book
       const newId = generateUniqueId(); // Generate a new unique ID
       setIsOpen(false); // Close the popup
-      addHighlight(bookName, [highlight], newId); // Add the new book with the highlight
+      addHighlight(selectedBook!.bookName, [highlight], newId); // Add the new book with the highlight
     }
   }
 
@@ -83,9 +85,10 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   }
 
   // Handle changes in the book selection
-  const handleBookSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedBook = books.find((book) => book.bookName === e.target.value); // Check if the input value matches an existing book
-    setBookName(e.target.value); // Update the book name state
+  const handleBookSelection = (bookObject) => {
+    //const selectedBook = books.find((book) => book.bookName === e.target.value); // Check if the input value matches an existing book
+    //setBookName(e.target.value); // Update the book name state
+    setSelectedBook(bookObject);
     setChoosedBookId(selectedBook ? selectedBook.id : null); // Update the selected book ID
   };
 
@@ -115,20 +118,22 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           {/* Input for the book name */}
           <label htmlFor="bookName">نام کتاب</label>
           <Autocomplete
-            value={choosedBookId}
+            value={selectedBook} // Store the selected book object
             onChange={(event, newValue) => {
-              setChoosedBookId(newValue); // Update the selected book
+              handleBookSelection(newValue);
+              console.log(newValue);
             }}
-            options={books.map((book) => book.bookName)} // List of book names
+            options={books} // Provide the book objects as options
+            getOptionLabel={(option) => option.bookName} // Show the book name
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="نام کتاب" // Label for the input field
+                label="نام کتاب"
                 variant="outlined"
                 placeholder="نام کتاب را انتخاب یا وارد کنید"
               />
             )}
-            freeSolo // Allow users to type a new book name not in the list
+            freeSolo // Allow users to enter a custom book name
           />
 
           {/*image*/}
