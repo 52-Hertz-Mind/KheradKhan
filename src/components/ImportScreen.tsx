@@ -3,7 +3,8 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons'; // FontAwesome i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Component to render FontAwesome icons
 import { useDispatch, useSelector } from 'react-redux'; // Redux hooks for interacting with the state
 import { AppDispatch, RootState } from '../state/store.ts'; // Type definitions for Redux store and dispatch
-import { addBook } from '../state/books/booksSlice.ts'; // Redux action to add a book to the store
+import { addBook } from '../state/books/booksSlice.ts';
+import { Autocomplete, TextField } from '@mui/material'; // Redux action to add a book to the store
 
 // Props interface for the ImportScreen component
 interface Props {
@@ -113,23 +114,25 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         >
           {/* Input for the book name */}
           <label htmlFor="bookName">نام کتاب</label>
-          <input
-            required
-            type="text"
-            list="books" // Connect the input to the datalist with the available books
-            placeholder="نام کتاب"
-            className="p-2 border-2 rounded-2xl"
-            value={bookName} // Bind the input value to the bookName state
-            onChange={handleBookSelection} // Update the state when the input changes
+          <Autocomplete
+            value={choosedBookId}
+            onChange={(event, newValue) => {
+              setChoosedBookId(newValue); // Update the selected book
+            }}
+            options={books.map((book) => book.bookName)} // List of book names
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="نام کتاب" // Label for the input field
+                variant="outlined"
+                placeholder="نام کتاب را انتخاب یا وارد کنید"
+              />
+            )}
+            freeSolo // Allow users to type a new book name not in the list
           />
 
-          {/* Datalist to show existing books */}
-          <datalist id="books">
-            {books.map((book) => (
-              <option key={book.id} value={book.bookName} /> // Render each book as an option
-            ))}
-          </datalist>
           {/*image*/}
+
           {!existingBook && (
             <div className="flex flex-col items-center gap-4">
               <button
