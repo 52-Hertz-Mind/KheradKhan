@@ -11,25 +11,30 @@ interface Props {
   setIsOpen: (value: boolean) => void; // Function to close the popup
 }
 
+interface Book {
+  id: string;
+  bookName: string;
+  highlightText: string[];
+}
+
 const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
-  // #region State Management
+  // #region 🔥 State Management
   const books = useSelector((state: RootState) => state.books.books);
   const bookDispatch = useDispatch<AppDispatch>();
 
-  const [choosedBookId, setChoosedBookId] = useState<string | null>(null);
-  const [fileName, setFileName] = useState('هیچ تصویری انتخاب نشده است');
+  const [fileName, setFileName] = useState<string>(
+    'هیچ تصویری انتخاب نشده است'
+  );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [highlight, setHighlight] = useState('');
-  const [selectedBook, setSelectedBook] = useState();
+  const [highlight, setHighlight] = useState<string>('');
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   // #endregion
 
-  // #region Utilities
-  const existingBook = books.find(
-    (book) => book.bookName === selectedBook?.bookName
-  );
+  // #region 🧮 Utilities
+  const existingBook = books.find((book) => book.id === selectedBook?.id);
 
-  const generateUniqueId = () => (books.length + 1).toString();
+  const generateUniqueId = (): string => (books.length + 1).toString();
 
   const addHighlight = (
     bookName: string,
@@ -40,7 +45,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   };
   // #endregion
 
-  // #region Event Handlers
+  // #region ✋ Event Handlers
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -58,32 +63,39 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
     e.preventDefault();
 
     if (existingBook) {
-      console.log('existingbook');
       setIsOpen(false);
-      addHighlight(selectedBook!.bookName, [highlight], existingBook.id);
+      addHighlight(selectedBook.bookName, [highlight], existingBook.id);
     } else {
-      console.log('else if of existing');
-      const newId = generateUniqueId();
       setIsOpen(false);
-      addHighlight(selectedBook!.bookName, [highlight], newId);
+      addHighlight(selectedBook?.bookName, [highlight], selectedBook.id);
     }
   };
 
   const closePopup = () => setIsOpen(false);
 
-  const handleBookSelection = (bookObject: any) => {
-    setSelectedBook(bookObject);
-    // setChoosedBookId(bookObject?.id || null);
+  const handleBookSelection = (newValue: string | Book | null) => {
+    if (typeof newValue === 'string') {
+      setSelectedBook({
+        bookName: newValue,
+        highlightText: [highlight],
+        id: generateUniqueId(),
+      });
+    } else if (newValue && typeof newValue === 'object') {
+      setSelectedBook(newValue);
+    }
   };
   // #endregion
 
-  // #region Effects
+  // #region 📢 Effects
   useEffect(() => {
-    console.log(books);
+    console.log('Books updated:', books);
   }, [books]);
+  useEffect(() => {
+    console.log('selected book is:', selectedBook);
+  }, [selectedBook]);
   // #endregion
 
-  // #region JSX Render
+  // #region ✨ JSX Render
   if (!isOpen) return null;
 
   return (
@@ -100,16 +112,13 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           className="flex flex-col gap-5"
           dir="rtl"
         >
-          {/* Book Name Input */}
+          {/* 📘 Book Name Input */}
           <label htmlFor="bookName">نام کتاب</label>
           <Autocomplete
             value={selectedBook}
-            onChange={(event, newValue) => {
-              handleBookSelection(newValue);
-              console.log(newValue);
-            }}
+            onChange={(event, newValue) => handleBookSelection(newValue)}
             options={books}
-            getOptionLabel={(option) => option.bookName}
+            getOptionLabel={(option) => option.bookName || ''}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -121,7 +130,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             freeSolo
           />
 
-          {/* Image Upload Section */}
+          {/* 📷 Image Upload Section */}
           {!existingBook && (
             <div className="flex flex-col items-center gap-4">
               <button
@@ -145,7 +154,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             </div>
           )}
 
-          {/* Highlight Input */}
+          {/* ✏️ Highlight Input */}
           <label htmlFor="highlight">هایلایت</label>
           <textarea
             required
@@ -155,7 +164,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             onChange={(e) => setHighlight(e.target.value)}
           />
 
-          {/* Submit Button */}
+          {/* ⬇️ Submit Button */}
           <button
             type="submit"
             className="flex items-center justify-center gap-5 mt-10 bg-blue-500 rounded-2xl p-2 text-white hover:bg-blue-700 duration-150"
@@ -168,7 +177,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           </button>
         </form>
 
-        {/* Close Button */}
+        {/* ❌ Close Button */}
         <button
           onClick={closePopup}
           className="absolute top-2 right-2 p-1 rounded-full hover:bg-gray-100 transition-colors duration-200"
