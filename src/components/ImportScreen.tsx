@@ -126,7 +126,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
               handleBookSelection(newInputValue);
             }}
             options={books}
-            getOptionLabel={(option) => option.bookName || ''}
+            getOptionLabel={(option) => option?.bookName || ''}
             renderInput={(params) => (
               <TextField
                 {...params}
