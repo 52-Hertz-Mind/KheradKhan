@@ -117,11 +117,11 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           <label htmlFor="bookName">نام کتاب</label>
           <Autocomplete
             value={selectedBook}
-            onChange={(event, newValue) => {
+            onChange={(newValue) => {
               console.log('new value is:', newValue);
               handleBookSelection(newValue);
             }}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(newInputValue) => {
               console.log('new input value is:', newInputValue);
               handleBookSelection(newInputValue);
             }}

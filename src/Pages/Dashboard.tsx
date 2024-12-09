@@ -46,6 +46,18 @@ function Dashboard() {
             />
             <p className="group-hover:-translate-x-1 duration-150">کتاب ها</p>
           </button>
+          <button
+            className="flex gap-5 items-center w-96 p-2 rounded-2xl hover:bg-gray-200  duration-300 group"
+            onClick={() => navigate('/review')}
+          >
+            <FontAwesomeIcon
+              icon={faBook}
+              className="size-8 transition-transform duration-300 group-hover:scale-110"
+            />
+            <p className="group-hover:-translate-x-1 duration-150">
+              مرور هایلایت
+            </p>
+          </button>
         </div>
       </div>
       <ImportScreen
