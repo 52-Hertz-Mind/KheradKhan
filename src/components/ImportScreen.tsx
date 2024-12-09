@@ -61,19 +61,20 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
   const importHighlight = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (existingBook) {
-      setIsOpen(false);
-      addHighlight(selectedBook.bookName, [highlight], existingBook.id);
-    } else {
-      setIsOpen(false);
-      addHighlight(selectedBook?.bookName, [highlight], selectedBook.id);
+    if (selectedBook) {
+      if (existingBook) {
+        setIsOpen(false);
+        addHighlight(selectedBook.bookName, [highlight], existingBook.id);
+      } else {
+        setIsOpen(false);
+        addHighlight(selectedBook.bookName, [highlight], selectedBook.id);
+      }
     }
   };
 
   const closePopup = () => setIsOpen(false);
 
-  const handleBookSelection = (newValue: string | Book | null) => {
+  const handleBookSelection = (newValue: string | Book) => {
     if (typeof newValue === 'string') {
       setSelectedBook({
         bookName: newValue,
@@ -116,7 +117,14 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           <label htmlFor="bookName">نام کتاب</label>
           <Autocomplete
             value={selectedBook}
-            onChange={(event, newValue) => handleBookSelection(newValue)}
+            onChange={(event, newValue) => {
+              console.log('new value is:', newValue);
+              handleBookSelection(newValue);
+            }}
+            onInputChange={(event, newInputValue) => {
+              console.log('new input value is:', newInputValue);
+              handleBookSelection(newInputValue);
+            }}
             options={books}
             getOptionLabel={(option) => option.bookName || ''}
             renderInput={(params) => (
