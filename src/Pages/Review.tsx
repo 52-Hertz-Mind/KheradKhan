@@ -33,9 +33,9 @@ function Review() {
 
   return (
     <div className="flex flex-col items-center justify-center" dir="rtl">
-      {currentIndex < randomHighlights?.length ? (
+      {currentIndex < randomHighlights!.length ? (
         <div className="flex flex-col gap-5 p-20 size-1/2 bg-gray-200 mt-10 rounded-2xl shadow-xl hover:shadow-2xl duration-300">
-          <p>{randomHighlights[currentIndex]}</p>
+          <p>{randomHighlights![currentIndex]}</p>
           <button
             className="bg-blue-700 w-32 h-fit rounded-2xl text-white p-2"
             onClick={handleNextHighlight}

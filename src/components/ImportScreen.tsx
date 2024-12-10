@@ -74,7 +74,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
   const closePopup = () => setIsOpen(false);
 
-  const handleBookSelection = (newValue: string | Book) => {
+  const handleBookSelection = (newValue: string | Book | null) => {
     if (typeof newValue === 'string') {
       setSelectedBook({
         bookName: newValue,
@@ -117,16 +117,18 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
           <label htmlFor="bookName">نام کتاب</label>
           <Autocomplete
             value={selectedBook}
-            onChange={(newValue) => {
-              console.log('new value is:', newValue);
+            onChange={(event, newValue) => {
+              console.log('new value is:', newValue, event);
               handleBookSelection(newValue);
             }}
-            onInputChange={(newInputValue) => {
-              console.log('new input value is:', newInputValue);
+            onInputChange={(event, newInputValue) => {
+              console.log('new input value is:', newInputValue, event);
               handleBookSelection(newInputValue);
             }}
             options={books}
-            getOptionLabel={(option) => option?.bookName || ''}
+            getOptionLabel={(option) =>
+              typeof option === 'string' ? option : option?.bookName || ''
+            }
             renderInput={(params) => (
               <TextField
                 {...params}
