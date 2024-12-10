@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/store.ts';
 import { useEffect, useState } from 'react';
+import HighlightCard from '../components/HighlightCard.tsx';
 
 function Review() {
   const books = useSelector((state: RootState) => state.books.books);
-  const [randomHighlights, setRandomHighlights] = useState<string[]>();
+  const [randomHighlights, setRandomHighlights] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   function getRandomHighlights(count: number): string[] {
@@ -32,21 +33,28 @@ function Review() {
   }, [currentIndex]);
 
   return (
-    <div className="flex flex-col items-center justify-center" dir="rtl">
-      {currentIndex < randomHighlights!.length ? (
-        <div className="flex flex-col gap-5 p-20 size-1/2 bg-gray-200 mt-10 rounded-2xl shadow-xl hover:shadow-2xl duration-300">
-          <p>{randomHighlights![currentIndex]}</p>
+    <div
+      className="h-screen flex flex-col items-center justify-center bg-gray-200"
+      dir="rtl"
+    >
+      {currentIndex < randomHighlights.length ? (
+        <>
+          <HighlightCard
+            id={`${randomHighlights![currentIndex]}`}
+            highlight={randomHighlights![currentIndex]}
+          />
           <button
             className="bg-blue-700 w-32 h-fit rounded-2xl text-white p-2"
             onClick={handleNextHighlight}
           >
             هایلایت بعدی
           </button>
-        </div>
+        </>
       ) : (
-        <div className="flex p-20 size-1/2 bg-gray-200 mt-10 rounded-2xl shadow-xl hover:shadow-2xl duration-300">
-          همه هایلایت‌ها نمایش داده شده‌اند 🎉
-        </div>
+        <HighlightCard
+          id={'2'}
+          highlight={'تعداد مرور هایلایت های امروز تموم شد🥳'}
+        />
       )}
     </div>
   );
