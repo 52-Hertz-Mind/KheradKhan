@@ -1,4 +1,4 @@
-import { FaRegEdit, FaRegHeart } from 'react-icons/fa';
+import { FaRegEdit, FaRegHeart, FaRegQuestionCircle } from 'react-icons/fa';
 import { IoShareOutline } from 'react-icons/io5';
 
 interface HighlightCardData {
@@ -8,6 +8,9 @@ interface HighlightCardData {
 
 function HighlightCard({ id, highlight }: HighlightCardData) {
   function handleFavorite() {}
+  function handleFrequency() {}
+  function handleHighlightEdit() {}
+  function handleHighlightShare() {}
 
   return (
     <div
@@ -17,14 +20,14 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
       <p>{highlight}</p>
       <div className="flex gap-10">
         <div
-          onClick={handleFavorite}
+          onClick={handleHighlightShare}
           className="cursor-pointer flex flex-col gap-2 justify-center items-center hover:text-gray-500 duration-150"
         >
           <IoShareOutline />
           <p className="text-sm">اشتراک گذاری</p>
         </div>
         <div
-          onClick={handleFavorite}
+          onClick={handleHighlightEdit}
           className="cursor-pointer flex flex-col gap-2 justify-center items-center hover:text-gray-500 duration-150"
         >
           <FaRegEdit />
@@ -36,6 +39,44 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
         >
           <FaRegHeart />
           <p className="text-sm">مورد علاقه</p>
+        </div>
+      </div>
+      <div className="flex flex-col items-center gap-3">
+        <div className="flex items-center gap-5">
+          <p>این هایلایت را ........... به من نشان بده</p>
+          <div className="relative group">
+            <FaRegQuestionCircle className="cursor-pointer" />
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-max p-2 text-sm text-white bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
+              ما بر اساس انتخاب‌های شما هایلایت‌ها را کمتر یا بیشتر نشان می‌دهیم
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-5">
+          <button
+            onClick={handleFrequency}
+            className="text-red-600 font-bold shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+          >
+            نشان نده
+          </button>
+          <button
+            onClick={handleFrequency}
+            className="shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+          >
+            کم تر
+          </button>
+          <button
+            onClick={handleFrequency}
+            className="shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+          >
+            بیشتر
+          </button>
+          <button
+            onClick={handleFrequency}
+            className="shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+          >
+            زیاد
+          </button>
         </div>
       </div>
     </div>
