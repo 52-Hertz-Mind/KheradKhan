@@ -4,6 +4,7 @@ import Footer from '../components/Footer.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HighlightCard from '../components/HighlightCard.tsx';
 
 function Highlights() {
   const { id } = useParams();
@@ -27,12 +28,7 @@ function Highlights() {
           filteredBooks.map((book) => (
             <div className="w-screen" dir="rtl">
               {book.highlightText.map((text) => (
-                <div
-                  className="size-1/3 h-96 m-auto mt-10 mb-10 text-gray-800 rounded-2xl p-10 bg-white"
-                  key={book.id}
-                >
-                  <p key={book.id}>{text}</p>
-                </div>
+                <HighlightCard id={book.id} highlight={text} />
               ))}
             </div>
             // <div

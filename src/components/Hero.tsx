@@ -37,7 +37,7 @@ function Hero() {
         </button>
       </div>
       <div>
-        <img src="/src/assets/hero.png" className="h-[600px] w-[1000px]" />
+        <img src="/hero.png" className="h-[600px] w-[1000px]" />
       </div>
       <SignIn isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
