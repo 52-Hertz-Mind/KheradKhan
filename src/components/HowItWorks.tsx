@@ -32,11 +32,7 @@ function HowItWorks() {
         <div className="flex flex-col gap-5 items-end w-1/3">
           <div className="flex gap-2 items-center justify-end border-b-2 border-b-black p-2 w-full">
             <p className="text-2xl">{captions.rememberTitle}</p>
-            <img
-              src="/src/assets/remember.png"
-              className="size-20"
-              alt="import image"
-            />
+            <img src="/remember.png" className="size-20" alt="import image" />
           </div>
           <p className="" dir="rtl">
             {captions.rememberCaption}
@@ -46,11 +42,7 @@ function HowItWorks() {
         <div className="flex flex-col gap-5 items-end w-1/3">
           <div className="flex gap-2 items-center justify-end border-b-2 border-b-black p-2 w-full">
             <p className="text-2xl">{captions.reviewTitle}</p>
-            <img
-              src="/src/assets/review.png"
-              className="size-20"
-              alt="import image"
-            />
+            <img src="/review.png" className="size-20" alt="import image" />
           </div>
           <p className="" dir="rtl">
             {captions.reviewCaption}
@@ -60,11 +52,7 @@ function HowItWorks() {
         <div className="flex flex-col gap-5 items-end w-1/3">
           <div className="flex gap-2 items-center justify-end border-b-2 border-b-black p-2 w-full">
             <p className="text-2xl">{captions.importTitle}</p>
-            <img
-              src="/src/assets/import.png"
-              className="size-20"
-              alt="import image"
-            />
+            <img src="/import.png" className="size-20" alt="import image" />
           </div>
           <p className="" dir="rtl">
             {captions.importCaption}
