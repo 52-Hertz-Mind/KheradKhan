@@ -8,6 +8,7 @@ import Books from './Pages/Books.tsx';
 import Highlights from './Pages/Highlights.tsx';
 import Review from './Pages/Review.tsx';
 import ReviewSetting from './Pages/ReviewSetting.tsx';
+import UserSetting from './Pages/UserSetting.tsx';
 function App() {
   const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ function App() {
     {
       path: 'reviewsetting',
       element: <ReviewSetting />,
+    },
+    {
+      path: 'usersetting',
+      element: <UserSetting />,
     },
   ]);
 
