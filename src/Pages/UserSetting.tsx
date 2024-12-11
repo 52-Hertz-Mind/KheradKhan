@@ -5,6 +5,7 @@ import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import {
+  Alert,
   Button,
   createTheme,
   Dialog,
@@ -15,7 +16,7 @@ import {
   TextField,
   ThemeProvider,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Create the RTL cache
 const cacheRtl = createCache({
@@ -33,6 +34,9 @@ function UserSetting() {
   const [passwordChangeOpen, setPasswordChangeOpen] = useState(false);
   const [name, setName] = useState('Mamad');
   const [password, setPassword] = useState('12345678');
+  const [isOldPasswordWrong, setIsOldPasswordWrong] = useState(false);
+  const [isPasswordChanged, setIsPasswordChanged] = useState(false);
+  const [isNameChanged, setIsNameChanged] = useState(false);
 
   const handleNameChangeClickOpen = () => {
     setNameChangeOpen(true);
@@ -45,6 +49,13 @@ function UserSetting() {
     setNameChangeOpen(false);
     setPasswordChangeOpen(false);
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOldPasswordWrong(false);
+      setIsPasswordChanged(false);
+      setIsNameChanged(false);
+    }, 3000);
+  }, [isOldPasswordWrong, isPasswordChanged, isNameChanged]);
   return (
     <div>
       <DashboardNavbar />
@@ -83,6 +94,7 @@ function UserSetting() {
                         );
                         const name = formJson.name;
                         setName(name);
+                        setIsNameChanged(true);
                         console.log(name);
                         handleClose();
                       },
@@ -141,9 +153,11 @@ function UserSetting() {
                         const oldPasswordUserEntered = formJson.oldpassword;
                         if (oldPasswordUserEntered === password) {
                           setPassword(newPassword);
+                          setIsPasswordChanged(true);
                           console.log('new password was set:', newPassword);
                         } else {
                           console.log('the old password was not correct');
+                          setIsOldPasswordWrong(true);
                         }
 
                         console.log(
@@ -189,6 +203,33 @@ function UserSetting() {
                       <Button onClick={handleClose}>لغو</Button>
                     </DialogActions>
                   </Dialog>
+                  {isOldPasswordWrong && (
+                    <Alert
+                      className="absolute top-10"
+                      variant="filled"
+                      severity="error"
+                    >
+                      رمز قبلی اشتباه بود
+                    </Alert>
+                  )}
+                  {isPasswordChanged && (
+                    <Alert
+                      className="absolute top-10"
+                      variant="filled"
+                      severity="success"
+                    >
+                      رمز تغییر کرد
+                    </Alert>
+                  )}
+                  {isNameChanged && (
+                    <Alert
+                      className="absolute top-10"
+                      variant="filled"
+                      severity="success"
+                    >
+                      اسم تغییر کرد
+                    </Alert>
+                  )}
                 </div>
               </div>
             </div>
