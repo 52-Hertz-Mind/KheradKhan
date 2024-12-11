@@ -29,14 +29,21 @@ const theme = createTheme({
 });
 
 function UserSetting() {
-  const [open, setOpen] = useState(false);
+  const [nameChangeOpen, setNameChangeOpen] = useState(false);
+  const [passwordChangeOpen, setPasswordChangeOpen] = useState(false);
   const [name, setName] = useState('Mamad');
+  const [password, setPassword] = useState('12345678');
+
   const handleNameChangeClickOpen = () => {
-    setOpen(true);
+    setNameChangeOpen(true);
+  };
+  const handlePasswordChangeClickOpen = () => {
+    setPasswordChangeOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setNameChangeOpen(false);
+    setPasswordChangeOpen(false);
   };
   return (
     <div>
@@ -64,7 +71,7 @@ function UserSetting() {
                   </button>
                   <Dialog
                     dir="rtl"
-                    open={open}
+                    open={nameChangeOpen}
                     onClose={handleClose}
                     PaperProps={{
                       component: 'form',
@@ -109,10 +116,56 @@ function UserSetting() {
                     id="outlined-basic"
                     label="رمز ورود"
                     variant="outlined"
-                    value={'1234'}
+                    value={password}
                     type="password"
                   />
-                  <button className="text-blue-700">تغییر رمز</button>
+                  <button
+                    onClick={handlePasswordChangeClickOpen}
+                    className="text-blue-700"
+                  >
+                    تغییر رمز
+                  </button>
+                  <Dialog
+                    dir="rtl"
+                    open={passwordChangeOpen}
+                    onClose={handleClose}
+                    PaperProps={{
+                      component: 'form',
+                      onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+                        event.preventDefault();
+                        const formData = new FormData(event.currentTarget);
+                        const formJson = Object.fromEntries(
+                          (formData as any).entries()
+                        );
+                        const password = formJson.password;
+                        setPassword(password);
+                        console.log(password);
+                        handleClose();
+                      },
+                    }}
+                  >
+                    <DialogTitle>تغییر رمز</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+                        رمز جدید خود را وارد کنید
+                      </DialogContentText>
+                      <TextField
+                        autoFocus
+                        required
+                        margin="dense"
+                        id="password"
+                        name="password"
+                        label="رمز"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button type="submit">تغییر اسم</Button>
+                      <Button onClick={handleClose}>لغو</Button>
+                    </DialogActions>
+                  </Dialog>
                 </div>
               </div>
             </div>
