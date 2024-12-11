@@ -11,8 +11,13 @@ function DashboardNavbar() {
     event.stopPropagation();
     setIsUserPopUpOpen((prevState) => !prevState);
   }
-  function handleReviewSettingClick() {
-    navigate('/reviewsetting');
+  function handlePopupClick(page: string) {
+    if (page === 'reviewsetting') {
+      navigate('/reviewsetting');
+    }
+    if (page === 'usersetting') {
+      navigate('/usersetting');
+    }
   }
 
   useEffect(() => {
@@ -46,11 +51,14 @@ function DashboardNavbar() {
             ref={popupRef}
             className={`rounded absolute shadow flex flex-col items-center gap-5 transition-all duration-150 ease-in-out ${isUserPopUpOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-75 pointer-events-none'}`}
           >
-            <button className="hover:bg-gray-200 size-full p-2 px-5">
+            <button
+              onClick={() => handlePopupClick('usersetting')}
+              className="hover:bg-gray-200 size-full p-2 px-5"
+            >
               تنظیمات حساب
             </button>
             <button
-              onClick={handleReviewSettingClick}
+              onClick={() => handlePopupClick('reviewsetting')}
               className="hover:bg-gray-200 size-full p-2 px-5"
             >
               تنظیمات مرور
