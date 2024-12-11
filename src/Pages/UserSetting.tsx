@@ -137,9 +137,21 @@ function UserSetting() {
                         const formJson = Object.fromEntries(
                           (formData as any).entries()
                         );
-                        const password = formJson.password;
-                        setPassword(password);
-                        console.log(password);
+                        const newPassword = formJson.password;
+                        const oldPasswordUserEntered = formJson.oldpassword;
+                        if (oldPasswordUserEntered === password) {
+                          setPassword(newPassword);
+                          console.log('new password was set:', newPassword);
+                        } else {
+                          console.log('the old password was not correct');
+                        }
+
+                        console.log(
+                          'old one user entered:',
+                          oldPasswordUserEntered,
+                          'new one:',
+                          newPassword
+                        );
                         handleClose();
                       },
                     }}
@@ -153,9 +165,20 @@ function UserSetting() {
                         autoFocus
                         required
                         margin="dense"
+                        id="oldpassword"
+                        name="oldpassword"
+                        label="رمز قبلی"
+                        type="password"
+                        fullWidth
+                        variant="standard"
+                      />
+                      <TextField
+                        autoFocus
+                        required
+                        margin="dense"
                         id="password"
                         name="password"
-                        label="رمز"
+                        label="رمز جدید"
                         type="password"
                         fullWidth
                         variant="standard"
