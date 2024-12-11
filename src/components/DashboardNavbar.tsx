@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 function DashboardNavbar() {
   const [isUserPopUpOpen, setIsUserPopUpOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
-  function handleUserPopup() {
+  function handleUserPopup(event: React.MouseEvent) {
+    event.stopPropagation();
     setIsUserPopUpOpen((prevState) => !prevState);
   }
 
