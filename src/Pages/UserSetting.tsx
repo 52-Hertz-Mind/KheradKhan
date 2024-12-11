@@ -4,7 +4,18 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import { createTheme, TextField, ThemeProvider } from '@mui/material';
+import {
+  Button,
+  createTheme,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  ThemeProvider,
+} from '@mui/material';
+import { useState } from 'react';
 
 // Create the RTL cache
 const cacheRtl = createCache({
@@ -18,6 +29,15 @@ const theme = createTheme({
 });
 
 function UserSetting() {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState('Mamad');
+  const handleNameChangeClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
       <DashboardNavbar />
@@ -34,9 +54,55 @@ function UserSetting() {
                     label="اسم"
                     variant="outlined"
                     type="name"
-                    value="Mamad"
+                    value={name}
                   />
-                  <button className="text-blue-700">تغییر اسم</button>
+                  <button
+                    onClick={handleNameChangeClickOpen}
+                    className="text-blue-700"
+                  >
+                    تغییر اسم
+                  </button>
+                  <Dialog
+                    dir="rtl"
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      component: 'form',
+                      onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+                        event.preventDefault();
+                        const formData = new FormData(event.currentTarget);
+                        const formJson = Object.fromEntries(
+                          (formData as any).entries()
+                        );
+                        const name = formJson.name;
+                        setName(name);
+                        console.log(name);
+                        handleClose();
+                      },
+                    }}
+                  >
+                    <DialogTitle>تغییر اسم</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+                        اسم جدید خود را وارد کنید
+                      </DialogContentText>
+                      <TextField
+                        autoFocus
+                        required
+                        margin="dense"
+                        id="name"
+                        name="name"
+                        label="اسم"
+                        type="name"
+                        fullWidth
+                        variant="standard"
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button type="submit">تغییر اسم</Button>
+                      <Button onClick={handleClose}>لغو</Button>
+                    </DialogActions>
+                  </Dialog>
                 </div>
                 <div className="flex gap-10">
                   <TextField
