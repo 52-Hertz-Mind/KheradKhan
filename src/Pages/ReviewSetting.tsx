@@ -4,6 +4,9 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import DashboardNavbar from '../components/DashboardNavbar.tsx';
 import { Slider, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store.ts';
+import Footer from '../components/Footer.tsx';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,6 +39,7 @@ function a11yProps(index: number) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const books = useSelector((state: RootState) => state.books.books);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -61,15 +65,38 @@ export default function BasicTabs() {
       label: '۱۰',
     },
     {
+      value: 20,
+      label: '۲۰',
+    },
+  ];
+  const recencyMarks = [
+    {
+      value: 1,
+      label: 'قدیمی تر',
+    },
+
+    {
       value: 15,
-      label: '۱۵',
+      label: 'جدید تر',
     },
   ];
 
+  const booksRepeatMark = [
+    {
+      value: 1,
+      label: 'هرگز',
+    },
+
+    {
+      value: 15,
+      label: 'بیشتر',
+    },
+  ];
   return (
     <div>
       <DashboardNavbar />
       <div className="px-96 py-20" dir="rtl">
+        <h1 className="text-5xl mb-3">تنظیمات مرور</h1>
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs
@@ -90,11 +117,25 @@ export default function BasicTabs() {
                 </Typography>
                 <Slider
                   aria-label="Highlights per day"
-                  defaultValue={5}
+                  defaultValue={10}
                   getAriaValueText={valuetext}
                   step={1}
                   valueLabelDisplay="auto"
                   marks={dailyHighlightMarks}
+                  min={1}
+                  max={20}
+                />
+              </Box>
+              <Box sx={{ width: 300 }}>
+                <Typography id="Highlights per day" gutterBottom>
+                  نمایش هایلایت جدید یا قدیم
+                </Typography>
+                <Slider
+                  aria-label="Highlights per day"
+                  defaultValue={5}
+                  getAriaValueText={valuetext}
+                  step={2}
+                  marks={recencyMarks}
                   min={1}
                   max={15}
                 />
@@ -102,10 +143,34 @@ export default function BasicTabs() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            Item Two
+            <div className="flex flex-col">
+              {books.map((book) => (
+                <div
+                  className="flex items-center justify-between border p-10"
+                  key={book.id}
+                >
+                  <p className="w-1/3 text-right">{book.bookName}</p>
+                  <p className="w-1/6 text-center">
+                    {book.highlightText.length}
+                  </p>
+                  <Box sx={{ width: 300 }} className="w-1/2">
+                    <Slider
+                      aria-label="Highlights per day"
+                      defaultValue={5}
+                      getAriaValueText={valuetext}
+                      step={2}
+                      marks={booksRepeatMark}
+                      min={1}
+                      max={15}
+                    />
+                  </Box>
+                </div>
+              ))}
+            </div>
           </CustomTabPanel>
         </Box>
       </div>
+      <Footer />
     </div>
   );
 }

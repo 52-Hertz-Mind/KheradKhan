@@ -60,14 +60,6 @@ function DashboardNavbar() {
             </button>
           </div>
         </div>
-
-        {/* thunder button */}
-        <button
-          className="w-10 h-10 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-sm"
-          aria-label="Lightning action"
-        >
-          <FontAwesomeIcon icon={faBolt} />
-        </button>
       </div>
 
       <div className="flex items-center gap-5">
