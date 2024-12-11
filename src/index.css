@@ -3,5 +3,5 @@
 @tailwind utilities;
 @font-face {
     font-family: "Kara";
-    src: url("src/assets/fonts/SGKara-Regular.ttf");
+    src: url("../public/SGKara-Regular.ttf");
 }
