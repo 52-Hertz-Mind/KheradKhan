@@ -2,12 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function DashboardNavbar() {
   const [isUserPopUpOpen, setIsUserPopUpOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   function handleUserPopup(event: React.MouseEvent) {
     event.stopPropagation();
     setIsUserPopUpOpen((prevState) => !prevState);
+  }
+  function handleReviewSettingClick() {
+    navigate('/reviewsetting');
   }
 
   useEffect(() => {
@@ -44,7 +49,10 @@ function DashboardNavbar() {
             <button className="hover:bg-gray-200 size-full p-2 px-5">
               تنظیمات حساب
             </button>
-            <button className="hover:bg-gray-200 size-full p-2 px-5">
+            <button
+              onClick={handleReviewSettingClick}
+              className="hover:bg-gray-200 size-full p-2 px-5"
+            >
               تنظیمات مرور
             </button>
             <button className="hover:bg-gray-200 size-full p-2 px-5">

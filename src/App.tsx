@@ -7,6 +7,7 @@ import NotFoundPage from './Pages/NotFoundPage.tsx';
 import Books from './Pages/Books.tsx';
 import Highlights from './Pages/Highlights.tsx';
 import Review from './Pages/Review.tsx';
+import ReviewSetting from './Pages/ReviewSetting.tsx';
 function App() {
   const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ function App() {
     {
       path: 'books/highlights/:id',
       element: <Highlights />,
+    },
+    {
+      path: 'reviewsetting',
+      element: <ReviewSetting />,
     },
   ]);
 
