@@ -1,6 +1,7 @@
 import { FaRegEdit, FaRegHeart, FaRegQuestionCircle } from 'react-icons/fa';
 import { IoShareOutline } from 'react-icons/io5';
 import { useState } from 'react';
+import { TextareaAutosize } from '@mui/material';
 
 interface HighlightCardData {
   id: string;
@@ -9,11 +10,21 @@ interface HighlightCardData {
 
 function HighlightCard({ id, highlight }: HighlightCardData) {
   const [isInEditedMode, setIsInEditedMode] = useState(false);
+  const [cardHighlight, setCardHighlight] = useState(highlight);
+  const [editedHighlight, setEditedHighlight] = useState(highlight);
 
   function handleFavorite() {}
   function handleFrequency() {}
   function handleHighlightEdit() {
     setIsInEditedMode(true);
+  }
+  function handleHighlightEditSave() {
+    setCardHighlight(editedHighlight);
+    setIsInEditedMode(false);
+  }
+  function handleEditCancel() {
+    setEditedHighlight(cardHighlight);
+    setIsInEditedMode(false);
   }
   function handleHighlightShare() {}
 
@@ -24,14 +35,16 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
           className="flex flex-col justify-between size-1/3 h-96 m-auto mt-10 mb-10 text-gray-800 rounded-2xl p-10 bg-white"
           key={id}
         >
-          <textarea
-            className="w-96 h-96"
-            value={highlight}
-            onChange={handleHighlightEdit}
+          <TextareaAutosize
+            className="'w-80 text-sm font-sans font-normal leading-5 px-3 py-2 rounded-lg shadow-md shadow-slate-100 dark:shadow-slate-900 focus:shadow-outline-purple dark:focus:shadow-outline-purple focus:shadow-lg border border-solid border-slate-300 hover:border-purple-500 dark:hover:border-purple-500 focus:border-purple-500 dark:focus:border-purple-500 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-300 focus-visible:outline-0 box-border"
+            aria-label="highlight"
+            placeholder={'هایلایت خود را وارد کنید'}
+            value={editedHighlight}
+            onChange={(e) => setEditedHighlight(e.target.value)}
           />
           <div className="flex gap-10">
-            <button onClick={() => setIsInEditedMode(false)}>لغو</button>
-            <button>ذخیره</button>
+            <button onClick={handleEditCancel}>لغو</button>
+            <button onClick={handleHighlightEditSave}>ذخیره</button>
           </div>
         </div>
       )}
@@ -40,7 +53,7 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
           className="flex flex-col justify-between size-1/3 h-96 m-auto mt-10 mb-10 text-gray-800 rounded-2xl p-10 bg-white"
           key={id}
         >
-          <p>{highlight}</p>
+          <p>{editedHighlight}</p>
 
           <div className="flex flex-col items-center gap-3">
             <div className="flex items-center gap-5">
