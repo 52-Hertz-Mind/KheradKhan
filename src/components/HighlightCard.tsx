@@ -13,8 +13,39 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
   const [cardHighlight, setCardHighlight] = useState(highlight);
   const [editedHighlight, setEditedHighlight] = useState(highlight);
 
+  const [isNeverFeedbackSet, setIsNeverFeedbackSet] = useState(false);
+  const [isLessFeedbackSet, setIsLessFeedbackSet] = useState(false);
+  const [isMoreFeedbackSet, setIsMoreFeedbackSet] = useState(false);
+  const [isALotFeedbackSet, setIsALotFeedbackSet] = useState(false);
   function handleFavorite() {}
-  function handleFrequency() {}
+  function handleFrequency(feedbackType: string) {
+    switch (feedbackType) {
+      case 'never':
+        setIsNeverFeedbackSet((prevState) => !prevState);
+        setIsLessFeedbackSet(false);
+        setIsMoreFeedbackSet(false);
+        setIsALotFeedbackSet(false);
+        break;
+      case 'less':
+        setIsLessFeedbackSet((prevState) => !prevState);
+        setIsNeverFeedbackSet(false);
+        setIsMoreFeedbackSet(false);
+        setIsALotFeedbackSet(false);
+        break;
+      case 'more':
+        setIsMoreFeedbackSet((prevState) => !prevState);
+        setIsNeverFeedbackSet(false);
+        setIsLessFeedbackSet(false);
+        setIsALotFeedbackSet(false);
+        break;
+      case 'alot':
+        setIsALotFeedbackSet((prevState) => !prevState);
+        setIsNeverFeedbackSet(false);
+        setIsLessFeedbackSet(false);
+        setIsMoreFeedbackSet(false);
+        break;
+    }
+  }
   function handleHighlightEdit() {
     setIsInEditedMode(true);
   }
@@ -69,26 +100,26 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
 
             <div className="flex gap-5">
               <button
-                onClick={handleFrequency}
-                className="text-red-600 font-bold shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+                onClick={() => handleFrequency('never')}
+                className={`${isNeverFeedbackSet && 'border-2 border-blue-400'} text-red-600 font-bold shadow p-2 w-20 hover:shadow-lg duration-150 rounded`}
               >
                 نشان نده
               </button>
               <button
-                onClick={handleFrequency}
-                className="shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+                onClick={() => handleFrequency('less')}
+                className={`${isLessFeedbackSet && 'border-2 border-blue-400'} shadow p-2 w-20 hover:shadow-lg duration-150 rounded`}
               >
                 کم تر
               </button>
               <button
-                onClick={handleFrequency}
-                className="shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+                onClick={() => handleFrequency('more')}
+                className={`${isMoreFeedbackSet && 'border-2 border-blue-400'} shadow p-2 w-20 hover:shadow-lg duration-150 rounded`}
               >
                 بیشتر
               </button>
               <button
-                onClick={handleFrequency}
-                className="shadow p-2 w-20 hover:shadow-lg duration-150 rounded"
+                onClick={() => handleFrequency('alot')}
+                className={`${isALotFeedbackSet && 'border-2 border-blue-400'} shadow p-2 w-20 hover:shadow-lg duration-150 rounded`}
               >
                 زیاد
               </button>
