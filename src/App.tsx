@@ -9,6 +9,8 @@ import Highlights from './Pages/Highlights.tsx';
 import Review from './Pages/Review.tsx';
 import ReviewSetting from './Pages/ReviewSetting.tsx';
 import UserSetting from './Pages/UserSetting.tsx';
+import { ThemeOptions } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material';
 function App() {
   const router = createBrowserRouter([
     {
@@ -42,7 +44,67 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  const theme = createTheme({
+    // Define your custom color palette
+    palette: {
+      primary: {
+        main: '#082584', // Custom purple color
+      },
+      secondary: {
+        main: '#FFB6C1', // Custom pink color
+      },
+      background: {
+        default: '#f9f9f9',
+      },
+    },
+
+    // // Define global typography
+    // typography: {
+    //   fontFamily: 'IRANSans, Arial, sans-serif', // Use your custom font
+    //   h1: {
+    //     fontSize: '2.5rem',
+    //     fontWeight: 'bold',
+    //   },
+    //   body1: {
+    //     fontSize: '1rem',
+    //   },
+    // },
+
+    // Customize MUI components globally
+    components: {
+      MuiTabs: {
+        styleOverrides: {
+          root: {
+            backgroundColor: '#f1f3fc', // Light purple background
+            borderRadius: '8px',
+          },
+          indicator: {
+            backgroundColor: '#082584', // Custom tab indicator color
+          },
+        },
+      },
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            color: '#4f4f4f', // Default text color for tabs
+            '&.Mui-selected': {
+              color: '#082584', // Selected tab text color
+              fontWeight: 'bold',
+            },
+            '&:hover': {
+              backgroundColor: '#dce6ff', // Hover effect on tabs
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />;
+    </ThemeProvider>
+  );
 }
 
 export default App;
