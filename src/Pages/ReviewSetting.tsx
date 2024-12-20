@@ -143,6 +143,11 @@ export default function BasicTabs() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
+            <div className="flex border bg-gray-100 justify-between p-5 px-10 items-center font-bold">
+              <p className="w-1/2 text-right">نام کتاب</p>
+              <p className="w-1/2 text-center">تعداد هایلایت</p>
+              <p className="w-1/2 text-center">مقدار تکرار</p>
+            </div>
             <div className="flex flex-col">
               {books.map((book) => (
                 <div
