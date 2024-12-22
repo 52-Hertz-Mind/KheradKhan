@@ -2,6 +2,7 @@ import { FaRegEdit, FaRegHeart, FaRegQuestionCircle } from 'react-icons/fa';
 import { IoShareOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import { TextareaAutosize } from '@mui/material';
+import { MdFavorite } from 'react-icons/md';
 
 interface HighlightCardData {
   id: string;
@@ -12,12 +13,15 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
   const [isInEditedMode, setIsInEditedMode] = useState(false);
   const [cardHighlight, setCardHighlight] = useState(highlight);
   const [editedHighlight, setEditedHighlight] = useState(highlight);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const [isNeverFeedbackSet, setIsNeverFeedbackSet] = useState(false);
   const [isLessFeedbackSet, setIsLessFeedbackSet] = useState(false);
   const [isMoreFeedbackSet, setIsMoreFeedbackSet] = useState(false);
   const [isALotFeedbackSet, setIsALotFeedbackSet] = useState(false);
-  function handleFavorite() {}
+  function handleFavorite() {
+    setIsFavorite(!isFavorite);
+  }
   function handleFrequency(feedbackType: string) {
     switch (feedbackType) {
       case 'never':
@@ -144,7 +148,8 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
               onClick={handleFavorite}
               className="cursor-pointer flex flex-col gap-2 justify-center items-center hover:text-gray-500 duration-150"
             >
-              <FaRegHeart />
+              {!isFavorite && <FaRegHeart />}
+              {isFavorite && <MdFavorite />}
               <p className="text-sm">مورد علاقه</p>
             </div>
           </div>

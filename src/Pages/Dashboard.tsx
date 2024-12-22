@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ImportScreen from '../components/ImportScreen.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MdFavorite, MdOutlinePreview } from 'react-icons/md';
 
 function Dashboard() {
   const [isImportScreenOpen, setIsImportScreenOpen] = useState(false);
@@ -48,12 +49,18 @@ function Dashboard() {
           </button>
           <button
             className="flex gap-5 items-center w-96 p-2 rounded-2xl hover:bg-gray-200  duration-300 group"
+            onClick={() => navigate('/favorites')}
+          >
+            <MdFavorite className="size-8 transition-transform duration-300 group-hover:scale-110" />
+            <p className="group-hover:-translate-x-1 duration-150">
+              مورد علاقه ها
+            </p>
+          </button>
+          <button
+            className="flex gap-5 items-center w-96 p-2 rounded-2xl hover:bg-gray-200  duration-300 group"
             onClick={() => navigate('/review')}
           >
-            <FontAwesomeIcon
-              icon={faBook}
-              className="size-8 transition-transform duration-300 group-hover:scale-110"
-            />
+            <MdOutlinePreview className="size-8 transition-transform duration-300 group-hover:scale-110" />
             <p className="group-hover:-translate-x-1 duration-150">
               مرور هایلایت
             </p>
