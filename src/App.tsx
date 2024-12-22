@@ -11,6 +11,7 @@ import ReviewSetting from './Pages/ReviewSetting.tsx';
 import UserSetting from './Pages/UserSetting.tsx';
 import { ThemeOptions } from '@mui/material/styles';
 import { createTheme, ThemeProvider } from '@mui/material';
+import Favorites from './Pages/Favorites.tsx';
 function App() {
   const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ function App() {
       path: 'usersetting',
       element: <UserSetting />,
     },
+    {
+      path: 'favorites',
+      element: <Favorites />,
+    },
   ]);
 
   const theme = createTheme({
@@ -57,18 +62,6 @@ function App() {
         default: '#f9f9f9',
       },
     },
-
-    // // Define global typography
-    // typography: {
-    //   fontFamily: 'IRANSans, Arial, sans-serif', // Use your custom font
-    //   h1: {
-    //     fontSize: '2.5rem',
-    //     fontWeight: 'bold',
-    //   },
-    //   body1: {
-    //     fontSize: '1rem',
-    //   },
-    // },
 
     // Customize MUI components globally
     components: {
@@ -102,7 +95,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }

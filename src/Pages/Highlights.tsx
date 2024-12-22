@@ -39,9 +39,7 @@ function Highlights() {
             // </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">
-            No highlights found for this book.
-          </p>
+          <p className="text-center text-gray-500">هایلایتی یافت نشد</p>
         )}
       </div>
       <Footer />
