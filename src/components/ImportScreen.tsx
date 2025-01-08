@@ -11,7 +11,7 @@ interface Props {
   setIsOpen: (value: boolean) => void; // Function to close the popup
 }
 
-interface Book {
+export interface HighlightDataModel {
   id: string;
   bookName: string;
   highlightText: string[];
@@ -27,7 +27,9 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [highlight, setHighlight] = useState<string>('');
-  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const [selectedBook, setSelectedBook] = useState<HighlightDataModel | null>(
+    null
+  );
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   // #endregion
 
@@ -74,7 +76,9 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
   const closePopup = () => setIsOpen(false);
 
-  const handleBookSelection = (newValue: string | Book | null) => {
+  const handleBookSelection = (
+    newValue: string | HighlightDataModel | null
+  ) => {
     if (typeof newValue === 'string') {
       setSelectedBook({
         bookName: newValue,

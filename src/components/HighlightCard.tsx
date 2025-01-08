@@ -125,12 +125,14 @@ function HighlightCard({ id, highlight }: HighlightCardData) {
               </button>
             </div>
           </div>
+
           <div className="flex gap-10">
             <div
               onClick={handleHighlightShare}
               className="cursor-pointer flex flex-col gap-2 justify-center items-center hover:text-gray-500 duration-150"
             >
               <IoShareOutline />
+
               <p className="text-sm">اشتراک گذاری</p>
             </div>
             <div
