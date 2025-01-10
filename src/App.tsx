@@ -31,7 +31,7 @@ function App() {
       element: <Review />,
     },
     {
-      path: 'books/highlights/:id',
+      path: 'books/highlights/:bookId',
       element: <Highlights />,
     },
     {

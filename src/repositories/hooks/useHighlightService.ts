@@ -3,12 +3,13 @@ import { BookModel } from '../../models/book.model.ts';
 import { highlightService } from '../services/highlight.service.ts';
 import { HighlightModel } from '../../models/highlight.model.ts';
 
-export function UseHighlightService() {
+export function useHighlightService() {
   const [fetchLoading, setFetchLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [bookData, setBookData] = useState<BookModel>(null);
 
   const fetchBookData = useCallback(async (bookId: string) => {
+    console.log('Fetching book data');
     setFetchLoading(true);
     try {
       const data = await highlightService.findHighlightsByBookId(bookId);
@@ -34,5 +35,11 @@ export function UseHighlightService() {
     },
     []
   );
-  return { fetchLoading, submitLoading, bookData };
+  return {
+    fetchLoading,
+    submitLoading,
+    bookData,
+    createHighlight,
+    fetchBookData,
+  };
 }
