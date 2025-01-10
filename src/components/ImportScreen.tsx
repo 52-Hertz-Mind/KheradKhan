@@ -11,7 +11,7 @@ interface Props {
   setIsOpen: (value: boolean) => void; // Function to close the popup
 }
 
-export interface HighlightDataModel {
+interface HighlightDataModel {
   id: string;
   bookName: string;
   highlightText: string[];

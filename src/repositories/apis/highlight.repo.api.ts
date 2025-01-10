@@ -4,10 +4,10 @@ import { HighlightResponseDto } from '../dtos/responses/HighlightResponseDto.ts'
 import { CreateHighlightRequestDto } from '../dtos/requests/CreateHighlightRequestDto.ts';
 
 class HighlightRepoApi {
-  async findHighlightsByBookId(bookId: string): Promise<HighlightResponseDto> {
-    return await baseRepoAPI.get<HighlightResponseDto>(
-      `/find-highlights-by-book-id/${bookId}`
-    );
+  async findHighlightsByBookId(
+    bookId: string
+  ): Promise<HighlightResponseDto[]> {
+    return await baseRepoAPI.get(`/find-highlights-by-book-id/${bookId}`);
   }
 
   async createHighlight(
