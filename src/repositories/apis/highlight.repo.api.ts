@@ -7,14 +7,16 @@ class HighlightRepoApi {
   async findHighlightsByBookId(
     bookId: string
   ): Promise<HighlightResponseDto[]> {
-    return await baseRepoAPI.get(`/find-highlights-by-book-id/${bookId}`);
+    return await baseRepoAPI.get(
+      `/highlight/find-highlights-by-book-id/${bookId}`
+    );
   }
 
   async createHighlight(
     body: CreateHighlightRequestDto
   ): Promise<HighlightResponseDto> {
     return await baseRepoAPI.post<HighlightResponseDto>(
-      '/create-highlight',
+      '/highlight/create-highlight',
       body
     );
   }

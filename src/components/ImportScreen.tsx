@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../state/store.ts';
 import { addBook } from '../state/books/booksSlice.ts';
 import { Autocomplete, TextField } from '@mui/material';
+import { useHighlightService } from '../repositories/hooks/useHighlightService.ts';
 
 interface Props {
   isOpen: boolean; // Determines if the popup is open
@@ -19,6 +20,7 @@ interface HighlightDataModel {
 
 const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   // #region 🔥 State Management
+  const { submitLoading, createHighlight } = useHighlightService();
   const books = useSelector((state: RootState) => state.books.books);
   const bookDispatch = useDispatch<AppDispatch>();
 
@@ -36,15 +38,15 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   // #region 🧮 Utilities
   const existingBook = books.find((book) => book.id === selectedBook?.id);
 
-  const generateUniqueId = (): string => (books.length + 1).toString();
+  // const generateUniqueId = (): string => (books.length + 1).toString();
 
-  const addHighlight = (
-    bookName: string,
-    highlightText: string[],
-    id: string
-  ) => {
-    bookDispatch(addBook({ bookName, highlightText, id }));
-  };
+  // const addHighlight = (
+  //   bookName: string,
+  //   highlightText: string[],
+  //   id: string
+  // ) => {
+  //   bookDispatch(addBook({ bookName, highlightText, id }));
+  // };
   // #endregion
 
   // #region ✋ Event Handlers
@@ -63,15 +65,11 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
   const importHighlight = (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedBook) {
-      if (existingBook) {
-        setIsOpen(false);
-        addHighlight(selectedBook.bookName, [highlight], existingBook.id);
-      } else {
-        setIsOpen(false);
-        addHighlight(selectedBook.bookName, [highlight], selectedBook.id);
-      }
-    }
+    const existingBookId = existingBook?.id;
+    const newBookName = existingBookId ? null : selectedBook.bookName;
+    createHighlight(highlight, newBookName, existingBookId).then(() =>
+      setIsOpen(false)
+    );
   };
 
   const closePopup = () => setIsOpen(false);
@@ -83,7 +81,7 @@ const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
       setSelectedBook({
         bookName: newValue,
         highlightText: [highlight],
-        id: generateUniqueId(),
+        id: null,
       });
     } else if (newValue && typeof newValue === 'object') {
       setSelectedBook(newValue);

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { BookModel } from '../../models/book.model.ts';
 import { highlightService } from '../services/highlight.service.ts';
-import { HighlightModel } from '../../models/highlight.model.ts';
 
 export function useHighlightService() {
   const [fetchLoading, setFetchLoading] = useState(false);
@@ -23,12 +22,7 @@ export function useHighlightService() {
     async (highlightText: string, bookName?: string, bookId?: string) => {
       setSubmitLoading(true);
       try {
-        const newData: HighlightModel = await highlightService.createHighlight(
-          highlightText,
-          bookName,
-          bookId
-        );
-        await fetchBookData(newData.bookId);
+        await highlightService.createHighlight(highlightText, bookName, bookId);
       } finally {
         setSubmitLoading(false);
       }
