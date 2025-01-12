@@ -20,6 +20,7 @@ class HighlightService {
       await highlightRepoApi.createHighlight(body);
     return this._convertHighlightResponseDtoToHighlightModel(response);
   }
+
   public async findHighlightsByBookId(bookId: string): Promise<BookModel> {
     const response = await highlightRepoApi.findHighlightsByBookId(bookId);
     return this._convertHighlightResponseDtoListToBookModel(response);
