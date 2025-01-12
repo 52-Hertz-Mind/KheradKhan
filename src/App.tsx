@@ -1,15 +1,16 @@
 import './App.css';
 import './i18n';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Landing from './Pages/Landing.tsx';
-import Dashboard from './Pages/Dashboard.tsx';
-import NotFoundPage from './Pages/NotFoundPage.tsx';
-import Books from './Pages/Books.tsx';
-import Highlights from './Pages/Highlights.tsx';
-import Review from './Pages/Review.tsx';
-import ReviewSetting from './Pages/ReviewSetting.tsx';
-import UserSetting from './Pages/UserSetting.tsx';
+
 import { createTheme, ThemeProvider } from '@mui/material';
+import Landing from './pages/Landing.tsx';
+import NotFoundPage from './pages/NotFoundPage.tsx';
+import Dashboard from './pages/Dashboard.tsx';
+import Books from './pages/Books.tsx';
+import Highlights from './pages/Highlights.tsx';
+import UserSetting from './pages/UserSetting.tsx';
+import Review from './pages/Review.tsx';
+import ReviewSetting from './pages/ReviewSetting.tsx';
 
 function App() {
   const router = createBrowserRouter([

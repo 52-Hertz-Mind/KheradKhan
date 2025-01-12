@@ -1,12 +1,16 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../state/store.ts';
 import DashboardNavbar from '../components/DashboardNavbar.tsx';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
 import { useEffect } from 'react';
+import { useBookService } from '../repositories/hooks/useBookService.ts';
 
 function Books() {
-  const books = useSelector((state: RootState) => state.books.books);
+  // const books = useSelector((state: RootState) => state.books.books);
+  const {
+    booksData: books,
+    allBooksFetchLoading,
+    fetchBooksData,
+  } = useBookService();
   const navigate = useNavigate();
 
   //region functions
@@ -16,8 +20,16 @@ function Books() {
   //endregion
 
   useEffect(() => {
-    console.log(books);
+    const fetchData = async () => {
+      await fetchBooksData();
+    };
+    fetchData().then();
+  }, [fetchBooksData]);
+
+  useEffect(() => {
+    console.log('all books', books);
   }, [books]);
+  if (!books) return null;
   return (
     <>
       <DashboardNavbar />
@@ -33,9 +45,9 @@ function Books() {
                 navigateToBook(book.id);
               }}
             >
-              <img src={book.bookImage} alt={book.bookName} />
+              <img src={book.image} alt={book.name} />
               <p className="flex flex-col" key={index}>
-                {book.bookName}
+                {book.name}
               </p>
             </div>
           ))}

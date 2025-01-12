@@ -37,7 +37,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function ReviewSetting() {
   const [value, setValue] = React.useState(0);
   const books = useSelector((state: RootState) => state.books.books);
 
