@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
 import { useEffect } from 'react';
 import { useBookService } from '../repositories/hooks/useBookService.ts';
+import { DEFAULT_BOOK_IMAGE } from '../utils/constant.ts';
 
 function Books() {
   // const books = useSelector((state: RootState) => state.books.books);
@@ -45,7 +46,7 @@ function Books() {
                 navigateToBook(book.id);
               }}
             >
-              <img src={book.image} alt={book.name} />
+              <img src={book.image || DEFAULT_BOOK_IMAGE} alt={book.name} />
               <p className="flex flex-col" key={index}>
                 {book.name}
               </p>
