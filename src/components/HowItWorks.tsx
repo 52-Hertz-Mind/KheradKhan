@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 function HowItWorks() {
   //region hooks
   const [captions, setCaptions] = useState<HowItWorksCaptionsModel>();
-  const [t, i18n] = useTranslation();
-  i18n;
+  const [t] = useTranslation();
+
   useEffect(() => {
     setCaption();
   }, []);

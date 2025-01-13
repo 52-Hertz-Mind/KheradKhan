@@ -5,8 +5,8 @@ function Hero() {
   //region hooks
   const [isOpen, setIsOpen] = useState(false);
   const [captions, setCaptions] = useState<HeaderCaptionsModel>();
-  const [t, i18n] = useTranslation();
-  i18n;
+  const [t] = useTranslation();
+
   useEffect(() => {
     setCaption();
   }, []);

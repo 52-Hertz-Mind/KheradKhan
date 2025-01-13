@@ -6,8 +6,7 @@ export const useExampleService = () => {
   const [fetchLoading, setFetchLoading] = useState<boolean>(false);
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [examples, setExamples] = useState<ExampleModel[]>([]);
-  const [example, setExample] = useState<ExampleModel>(null);
-
+  const [example] = useState<ExampleModel>(null);
   const fetchExamples = useCallback(async () => {
     setFetchLoading(true);
     try {

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../state/store.ts';
-import { addBook } from '../state/books/booksSlice.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store.ts';
+
 import { Autocomplete, TextField } from '@mui/material';
 import { useHighlightService } from '../repositories/hooks/useHighlightService.ts';
 
@@ -20,9 +20,9 @@ interface HighlightDataModel {
 
 const ImportScreen: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   // #region 🔥 State Management
-  const { submitLoading, createHighlight } = useHighlightService();
+  const { createHighlight } = useHighlightService();
   const books = useSelector((state: RootState) => state.books.books);
-  const bookDispatch = useDispatch<AppDispatch>();
+  // const bookDispatch = useDispatch<AppDispatch>();
 
   const [fileName, setFileName] = useState<string>(
     'هیچ تصویری انتخاب نشده است'

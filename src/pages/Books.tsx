@@ -7,11 +7,7 @@ import { DEFAULT_BOOK_IMAGE } from '../utils/constant.ts';
 
 function Books() {
   // const books = useSelector((state: RootState) => state.books.books);
-  const {
-    booksData: books,
-    allBooksFetchLoading,
-    fetchBooksData,
-  } = useBookService();
+  const { booksData: books, fetchBooksData } = useBookService();
   const navigate = useNavigate();
 
   //region functions
