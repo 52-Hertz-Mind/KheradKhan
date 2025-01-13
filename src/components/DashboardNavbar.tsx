@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';

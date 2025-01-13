@@ -42,6 +42,7 @@ export default function ReviewSetting() {
   const books = useSelector((state: RootState) => state.books.books);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event);
     setValue(newValue);
   };
   function valuetext(value: number) {
